@@ -26,3 +26,12 @@ const icondata = {
   Category.snacks: Icons.screen_search_desktop,
   Category.sauces: Icons.battery_std_outlined
 };
+
+class ListTrait {
+  const ListTrait(this.title, this.id, this.quantity, this.icon);
+
+  final String title;
+  final String id;
+  final double quantity;
+  final IconData icon;
+}
