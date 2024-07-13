@@ -15,11 +15,11 @@ enum Category {
 }
 
 const icondata = {
-  Category.backing: Icon(Icons.bakery_dining_rounded),
-  Category.breads: Icon(Icons.breakfast_dining),
-  Category.diary: Icon(Icons.multitrack_audio),
-  Category.sices: Icon(Icons.room_service_sharp),
-  Category.vegitables: Icon(Icons.view_agenda_outlined),
+  Category.backing: Icons.bakery_dining_rounded,
+  Category.breads: Icons.breakfast_dining,
+  Category.diary: Icons.multitrack_audio,
+  Category.sices: Icons.room_service_sharp,
+  Category.vegitables: Icons.view_agenda_outlined,
   Category.meat: Icons.medication_liquid,
   Category.households: Icons.house_outlined,
   Category.toileries: Icons.trip_origin_outlined,
@@ -28,10 +28,16 @@ const icondata = {
 };
 
 class ListTrait {
-  const ListTrait(this.title, this.id, this.quantity, this.icon);
+  const ListTrait(this.title, this.id, this.quantity, this.category);
 
   final String title;
   final String id;
   final double quantity;
-  final IconData icon;
+  final Category category;
 }
+
+const groceryList = [
+  ListTrait('Milk', 'c1', 5, Category.backing),
+  ListTrait('something', 'c2', 6, Category.breads),
+  ListTrait('newthing', 'c3', 6, Category.sices)
+];
