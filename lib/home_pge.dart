@@ -18,13 +18,6 @@ class HomePage extends StatelessWidget {
                 .copyWith(color: Colors.white),
           ),
         ),
-        body: ListView.builder(
-            itemBuilder: (ctx, index) => ListTile(
-                  title: Text(listofitems[index].name),leading:  Container(
-              height: 30,
-              width: 30,
-              color:listofitems[index].cats.color ,
-            ),
-                )));
+        body: )
   }
 }
