@@ -5,12 +5,15 @@ import 'package:shopping_list/home_pge.dart';
 void main() {
   runApp(
     MaterialApp(
-      theme: ThemeData(useMaterial3: true).copyWith(textTheme: GoogleFonts.latoTextTheme(),
+      theme: ThemeData(useMaterial3: true).copyWith(
+        textTheme: GoogleFonts.latoTextTheme(),
         colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.blue,
             surface: const Color.fromARGB(255, 31, 71, 77),
             brightness: Brightness.dark),
-      ),home:const HomePage(),
+      ),
+      home: const SafeArea(
+          bottom: true, left: true, right: true, top: true, child: HomePage()),
     ),
   );
 }
