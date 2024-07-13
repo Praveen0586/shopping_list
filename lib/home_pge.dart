@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_list/datas/categories.dart';
-import 'package:shopping_list/datas/items_groceries.dart';
-import 'package:shopping_list/widget.dart';
+import 'package:shopping_list/model/list_tile.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -18,6 +16,6 @@ class HomePage extends StatelessWidget {
                 .copyWith(color: Colors.white),
           ),
         ),
-        body: )
+        body: const Listing());
   }
 }

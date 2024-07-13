@@ -32,12 +32,12 @@ class ListTrait {
 
   final String title;
   final String id;
-  final double quantity;
+  final int quantity;
   final Category category;
 }
 
 const groceryList = [
   ListTrait('Milk', 'c1', 5, Category.backing),
-  ListTrait('something', 'c2', 6, Category.breads),
-  ListTrait('newthing', 'c3', 6, Category.sices)
+  ListTrait('Something', 'c2', 6, Category.breads),
+  ListTrait('Newthing', 'c3', 6, Category.sices)
 ];
