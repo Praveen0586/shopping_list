@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 enum Category {
   fruits,
   diary,
@@ -12,6 +11,27 @@ enum Category {
   breads,
   toileries,
   households
+}
+
+const catstest = {
+  Category.backing: Cats('Backing', Icons.bakery_dining_outlined),
+  Category.diary: Cats('Diary', Icons.multitrack_audio),
+  Category.breads: Cats('breads', Icons.breakfast_dining_outlined),
+  Category.fruits: Cats(' Fruits', Icons.shopping_basket_outlined),
+  Category.sices: Cats('Sices', Icons.room_service_outlined),
+  Category.vegitables: Cats('Vegitables', Icons.view_agenda_outlined),
+  Category.meat: Cats('Meat', Icons.food_bank_outlined),
+  Category.sauces: Cats('Sauces', Icons.water_drop_outlined),
+  Category.toileries: Cats('Toileries', Icons.circle_outlined),
+  Category.snacks: Cats('Snacks', Icons.screen_search_desktop_outlined),
+  Category.households: Cats('House Holds', Icons.house_outlined)
+};
+
+class Cats {
+  const Cats(this.title, this.Icon);
+
+  final String title;
+  final IconData Icon;
 }
 
 const icondata = {
@@ -28,21 +48,48 @@ const icondata = {
   Category.fruits: Icons.shopping_basket_outlined
 };
 
+const names = {
+  Category.backing: 'Backing',
+  Category.breads: 'Breads',
+  Category.diary: 'Diary',
+  Category.fruits: 'Fruits',
+  Category.households: 'House Holds',
+  Category.meat: 'Meat',
+  Category.sauces: 'Sauces',
+  Category.sices: 'Sices',
+  Category.snacks: 'Snacks',
+  Category.toileries: 'Toileries',
+  Category.vegitables: 'Vegitables'
+};
+
 List<Map> enumname = [
-  {'name': ' fruits', 'Icon': Icons.shopping_basket_outlined},
-  {'name': 'diary', 'Icon': Icons.multitrack_audio},
-  {'name': 'sices', 'Icon': Icons.room_service_sharp},
-  {'name': 'vegitables', 'Icon': Icons.view_agenda_outlined},
-  {'name': 'meat', 'Icon': Icons.medication_liquid},
-  {'name': 'backing', 'Icon': Icons.bakery_dining_rounded},
-  {'name': 'sauces', 'Icon': Icons.battery_std_outlined},
-  {'name': 'snacks', 'Icon': Icons.screen_search_desktop},
-  {'name': 'breads', 'Icon': Icons.breakfast_dining},
-  {'name': 'toileries', 'Icon': Icons.trip_origin_outlined},
-  {'name': 'households', 'Icon': Icons.house_outlined}
+  {'name': ' fruits'},
+  {'name': 'diary'},
+  {'name': 'sices'},
+  {'name': 'vegitables'},
+  {'name': 'meat'},
+  {'name': 'backing'},
+  {'name': 'sauces'},
+  {'name': 'snacks'},
+  {'name': 'breads'},
+  {'name': 'toileries'},
+  {'name': 'households'}
 ];
 
-
+List<String> grocerynames = [
+  ' fruits',
+  'diary',
+  'sices',
+  'vegitables',
+  'meat',
+  'backing',
+  'sauces',
+  'snacks',
+  'breads',
+  'breads',
+  'toileries',
+  'households'
+];
 
 class ListTrait {
   const ListTrait(this.title, this.id, this.quantity, this.category);

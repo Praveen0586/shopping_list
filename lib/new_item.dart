@@ -51,24 +51,48 @@ class _NewitemState extends State<Newitem> {
                     width: 8,
                   ),
                   Expanded(
-                    child: DropdownButtonFormField(items: [
-                      for (var list in Category.values)
-                        DropdownMenuItem(
-                          value: Category.values,
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                  height: 12,
-                                  width: 12,
-                                  child: Icon(Icons.abc)),
-                              const SizedBox(
-                                width: 25,
+                    child: DropdownButtonFormField(
+                        items: [
+                          for (var cats in catstest.entries)
+                            DropdownMenuItem(
+                              enabled: true,
+                              value: catstest.values,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 12,
+                                    width: 12,
+                                    child: Icon(
+                                      cats.value.Icon,
+                                      size: 23,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 15,
+                                  ),
+                                  SizedBox(
+                                    height: 26,
+                                    child: Text(
+                                      cats.value.title,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium,
+                                    ),
+                                  )
+                                ],
                               ),
-                              Text(enumname.first)
-                            ],
-                          ),
-                        )
-                    ], onChanged: (value) => {}),
+                            )
+                        ],
+                        decoration: InputDecoration(
+                            label: Text(
+                          'Choose Catagory',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(fontSize: 10),
+                        )),
+                        onChanged: (value) => {}),
                   ),
                 ],
               ),
@@ -79,3 +103,22 @@ class _NewitemState extends State<Newitem> {
     );
   }
 }
+
+
+//  for (var list in Category.values)
+//                         DropdownMenuItem( 
+//                           value: Category.diary,
+//                           child: Row(
+//                             children: [
+//                               SizedBox(
+//                                   height: 12,
+//                                   width: 12,
+//                                   child: Icon(icondata[list])),
+//                               const SizedBox(
+//                                 width: 25,
+//                               ),
+//                             // for ( var names in enumname)
+//                                 Text( names.toString())
+//                             ],
+//                           ),
+//                         )
