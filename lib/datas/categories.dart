@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class Cats {
-  const Cats(this.title, this.Icon);
+class Category {
+  const Category(this.title, this.icon);
 
   final String title;
-  final IconData Icon;
+  final IconData icon;
 }

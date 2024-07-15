@@ -11,8 +11,22 @@ class Newitem extends StatefulWidget {
 }
 
 class _NewitemState extends State<Newitem> {
+
   var _selectedtitle = '';
- var     _selectedCategory    = catstest[Category.diary]!;
+  var _selectedCategory = catstest[Categories.backing]!;
+  var _selectedQuantity = 1;
+  var _selectedcats = null;
+  var _formkey = GlobalKey<FormState>();
+
+  void _save() {
+    if (_formkey.currentState!.validate()) {
+      _formkey.currentState!.save();
+      print(_selectedcats);
+      print(_selectedtitle);
+      print(_selectedQuantity);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +42,7 @@ class _NewitemState extends State<Newitem> {
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: Form(
+          key: _formkey,
           child: Column(
             children: [
               TextFormField(
@@ -43,9 +58,12 @@ class _NewitemState extends State<Newitem> {
                       value.isEmpty ||
                       value.trim().length <= 1 ||
                       value.trim().length > 50) {
-                    return 'must between 1 ad 50 charector';
+                    return 'must be between 1 and 50 charector';
                   }
                   return null;
+                },
+                onSaved: (newValue) {
+                  _selectedtitle = newValue!.toString();
                 },
               ),
               Row(
@@ -53,6 +71,9 @@ class _NewitemState extends State<Newitem> {
                   Expanded(
                     child: TextFormField(
                         initialValue: '1',
+                        onSaved: (newValue) {
+                          _selectedQuantity = int.parse(newValue!);
+                        },
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           label: Text(
@@ -64,8 +85,7 @@ class _NewitemState extends State<Newitem> {
                           if (quantity == null ||
                               quantity.isEmpty ||
                               double.tryParse(quantity) == null ||
-                              double.tryParse(quantity)! <= 0 ||
-                              double.tryParse(quantity)! > 10) {
+                              double.tryParse(quantity)! <= 0) {
                             return ' At least the value must be 1 ';
                           }
                           return null;
@@ -75,8 +95,9 @@ class _NewitemState extends State<Newitem> {
                     width: 8,
                   ),
                   Expanded(
-                    child: DropdownButtonFormField (
-                      value: _selectedCategory,
+                    child: DropdownButtonFormField(
+                   //  value: _selectedCategory,
+                          //  value: catstest[Categories.backing]!,
                       items: [
                         for (var cats in catstest.entries)
                           DropdownMenuItem(
@@ -89,7 +110,7 @@ class _NewitemState extends State<Newitem> {
                                   height: 12,
                                   width: 12,
                                   child: Icon(
-                                    cats.value.Icon,
+                                    cats.value.icon,
                                     size: 23,
                                   ),
                                 ),
@@ -116,9 +137,7 @@ class _NewitemState extends State<Newitem> {
                             .titleMedium!
                             .copyWith(fontSize: 10),
                       )),
-                      onChanged: (value) => {
-                       _selectedCategory = value
-                      },
+                      onChanged: ( value) => { },
                     ),
                   ),
                 ],
@@ -131,18 +150,18 @@ class _NewitemState extends State<Newitem> {
                 children: [
                   TextButton.icon(
                       onPressed: () {
-                        Navigator.of(context).pop();
+                        _formkey.currentState!.reset();
                       },
                       icon: const Icon(Icons.chevron_left_outlined),
                       label: Text(
-                        'Cancel',
+                        'Reset',
                         style: Theme.of(context).textTheme.titleSmall,
                       )),
                   ElevatedButton.icon(
                     style: ButtonStyle(
                         backgroundColor: WidgetStatePropertyAll(
                             Theme.of(context).colorScheme.onSecondary)),
-                    onPressed: () {},
+                    onPressed: _save,
                     label: const Text('Add'),
                     icon: const Icon(
                       Icons.done_all_outlined,

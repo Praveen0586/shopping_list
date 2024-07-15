@@ -46,7 +46,8 @@ class _ListingState extends State<Listing> {
         ),
         enabled: true,
         leading: Icon(
-          icondata[groceryList[index].category],
+          
+         icondata[groceryList[index].category],
           color: Theme.of(context).colorScheme.onPrimary,
         ),
         trailing: Text(
