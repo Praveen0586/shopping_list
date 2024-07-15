@@ -92,10 +92,38 @@ class _NewitemState extends State<Newitem> {
                               .titleMedium!
                               .copyWith(fontSize: 10),
                         )),
-                        onChanged: (value) => {}),
+                        onChanged: (value) => {print(value)}),
                   ),
                 ],
               ),
+              const SizedBox(
+                height: 25,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton.icon(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      icon: const Icon(Icons.chevron_left_outlined),
+                      label: Text(
+                        'Cancel',
+                        style: Theme.of(context).textTheme.titleSmall,
+                      )),
+                  ElevatedButton.icon(
+                    style: ButtonStyle(
+                        backgroundColor: WidgetStatePropertyAll(
+                            Theme.of(context).colorScheme.onSecondary)),
+                    onPressed: () {},
+                    label: const Text('Add'),
+                    icon: const Icon(
+                      Icons.done_all_outlined,
+                      size: 12,
+                    ),
+                  )
+                ],
+              )
             ],
           ),
         ),
