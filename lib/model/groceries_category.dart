@@ -28,19 +28,21 @@ const icondata = {
   Category.fruits: Icons.shopping_basket_outlined
 };
 
-List<String> enumname = [
-  ' fruits',
-  'diary',
-  'sices',
-  'vegitables',
-  'meat',
-  'backing',
-  'sauces',
-  'snacks',
-  'breads',
-  'toileries',
-  'households'
+List<Map> enumname = [
+  {'name': ' fruits', 'Icon': Icons.shopping_basket_outlined},
+  {'name': 'diary', 'Icon': Icons.multitrack_audio},
+  {'name': 'sices', 'Icon': Icons.room_service_sharp},
+  {'name': 'vegitables', 'Icon': Icons.view_agenda_outlined},
+  {'name': 'meat', 'Icon': Icons.medication_liquid},
+  {'name': 'backing', 'Icon': Icons.bakery_dining_rounded},
+  {'name': 'sauces', 'Icon': Icons.battery_std_outlined},
+  {'name': 'snacks', 'Icon': Icons.screen_search_desktop},
+  {'name': 'breads', 'Icon': Icons.breakfast_dining},
+  {'name': 'toileries', 'Icon': Icons.trip_origin_outlined},
+  {'name': 'households', 'Icon': Icons.house_outlined}
 ];
+
+
 
 class ListTrait {
   const ListTrait(this.title, this.id, this.quantity, this.category);
