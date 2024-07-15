@@ -33,19 +33,38 @@ class _NewitemState extends State<Newitem> {
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
+                validator: (value) {
+                  if (value == null ||
+                      value.isEmpty ||
+                      value.trim().length <= 1 ||
+                      value.trim().length > 50) {
+                    return 'must between 1 ad 50 charector';
+                  }
+                  return null;
+                },
               ),
               Row(
                 children: [
                   Expanded(
                     child: TextFormField(
-                      initialValue: '1',
-                      decoration: InputDecoration(
-                        label: Text(
-                          'Quantity',
-                          style: Theme.of(context).textTheme.bodyMedium,
+                        initialValue: '1',
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          label: Text(
+                            'Quantity',
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
                         ),
-                      ),
-                    ),
+                        validator: (quantity) {
+                          if (quantity == null ||
+                              quantity.isEmpty ||
+                              double.tryParse(quantity) == null ||
+                              double.tryParse(quantity)! <= 0 ||
+                              double.tryParse(quantity)! > 10) {
+                            return ' At least the value must be 1 ';
+                          }
+                          return null;
+                        }),
                   ),
                   const SizedBox(
                     width: 8,
