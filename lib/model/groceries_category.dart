@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_list/datas/categories.dart';
+
 enum Category {
   fruits,
   diary,
@@ -26,13 +28,6 @@ const catstest = {
   Category.snacks: Cats('Snacks', Icons.screen_search_desktop_outlined),
   Category.households: Cats('House Holds', Icons.house_outlined)
 };
-
-class Cats {
-  const Cats(this.title, this.Icon);
-
-  final String title;
-  final IconData Icon;
-}
 
 const icondata = {
   Category.backing: Icons.bakery_dining_rounded,

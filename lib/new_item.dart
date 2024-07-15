@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import 'package:shopping_list/datas/categories.dart';
 import 'package:shopping_list/model/groceries_category.dart';
 
 class Newitem extends StatefulWidget {
@@ -9,6 +11,8 @@ class Newitem extends StatefulWidget {
 }
 
 class _NewitemState extends State<Newitem> {
+  var _selectedtitle = '';
+ var     _selectedCategory    = catstest[Category.diary]!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,6 +31,7 @@ class _NewitemState extends State<Newitem> {
           child: Column(
             children: [
               TextFormField(
+                initialValue: _selectedtitle,
                 decoration: InputDecoration(
                   label: Text(
                     'Title',
@@ -70,48 +75,51 @@ class _NewitemState extends State<Newitem> {
                     width: 8,
                   ),
                   Expanded(
-                    child: DropdownButtonFormField(
-                        items: [
-                          for (var cats in catstest.entries)
-                            DropdownMenuItem(
-                              enabled: true,
-                              value: catstest.values,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    height: 12,
-                                    width: 12,
-                                    child: Icon(
-                                      cats.value.Icon,
-                                      size: 23,
-                                    ),
+                    child: DropdownButtonFormField (
+                      value: _selectedCategory,
+                      items: [
+                        for (var cats in catstest.entries)
+                          DropdownMenuItem(
+                            enabled: true,
+                            value: catstest.values,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 12,
+                                  width: 12,
+                                  child: Icon(
+                                    cats.value.Icon,
+                                    size: 23,
                                   ),
-                                  const SizedBox(
-                                    width: 15,
+                                ),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                SizedBox(
+                                  height: 26,
+                                  child: Text(
+                                    cats.value.title,
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
                                   ),
-                                  SizedBox(
-                                    height: 26,
-                                    child: Text(
-                                      cats.value.title,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
-                        ],
-                        decoration: InputDecoration(
-                            label: Text(
-                          'Choose Catagory',
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium!
-                              .copyWith(fontSize: 10),
-                        )),
-                        onChanged: (value) => {print(value)}),
+                                )
+                              ],
+                            ),
+                          )
+                      ],
+                      decoration: InputDecoration(
+                          label: Text(
+                        'Choose Catagory',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(fontSize: 10),
+                      )),
+                      onChanged: (value) => {
+                       _selectedCategory = value
+                      },
+                    ),
                   ),
                 ],
               ),
