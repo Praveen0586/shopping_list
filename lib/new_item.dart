@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:shopping_list/datas/categories.dart';
 import 'package:shopping_list/model/groceries_category.dart';
@@ -11,17 +10,15 @@ class Newitem extends StatefulWidget {
 }
 
 class _NewitemState extends State<Newitem> {
-
   var _selectedtitle = '';
-  var _selectedCategory = catstest[Categories.backing]!;
+  var _selectedCategory = catstest[Categories.diary]!;
   var _selectedQuantity = 1;
-  var _selectedcats = null;
   var _formkey = GlobalKey<FormState>();
 
   void _save() {
     if (_formkey.currentState!.validate()) {
       _formkey.currentState!.save();
-      print(_selectedcats);
+      print(_selectedCategory);
       print(_selectedtitle);
       print(_selectedQuantity);
     }
@@ -96,13 +93,23 @@ class _NewitemState extends State<Newitem> {
                   ),
                   Expanded(
                     child: DropdownButtonFormField(
-                   //  value: _selectedCategory,
-                          //  value: catstest[Categories.backing]!,
+                      onSaved: (newValue) {
+                        setState(() {
+                          _selectedCategory = newValue!;
+                        });
+                      },
+                      value: _selectedCategory,
+                      //  value: catstest[Categories.backing]!,
                       items: [
                         for (var cats in catstest.entries)
+                          //to avoid this for loop we can use
+                          // .map((items) => Dropdown menuitem (
+                          //  value: items ,
+                          //  etc .....))
                           DropdownMenuItem(
                             enabled: true,
-                            value: catstest.values,
+                            value: cats
+                                .value, //note th evalue using hee we must enter the var value intiated in the for loop or on map method
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -124,7 +131,7 @@ class _NewitemState extends State<Newitem> {
                                     style:
                                         Theme.of(context).textTheme.titleMedium,
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           )
@@ -137,7 +144,7 @@ class _NewitemState extends State<Newitem> {
                             .titleMedium!
                             .copyWith(fontSize: 10),
                       )),
-                      onChanged: ( value) => { },
+                      onChanged: (value) => {},
                     ),
                   ),
                 ],
@@ -178,9 +185,8 @@ class _NewitemState extends State<Newitem> {
   }
 }
 
-
 //  for (var list in Category.values)
-//                         DropdownMenuItem( 
+//                         DropdownMenuItem(
 //                           value: Category.diary,
 //                           child: Row(
 //                             children: [
