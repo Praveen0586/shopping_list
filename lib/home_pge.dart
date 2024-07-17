@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_list/model/groceries_category.dart';
-import 'package:shopping_list/model/list_tile.dart';
 import 'package:shopping_list/new_item.dart';
 
 class HomePage extends StatefulWidget {

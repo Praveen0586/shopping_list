@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shopping_list/datas/categories.dart';
 import 'package:shopping_list/model/groceries_category.dart';
+import 'package:http/http.dart' as http;
 
 class Newitem extends StatefulWidget {
   const Newitem({super.key});
@@ -21,10 +24,30 @@ class _NewitemState extends State<Newitem> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text('Grocery Updated',
               style: Theme.of(context).textTheme.bodyLarge!)));
-      Navigator.of(context).pop(
-        ListTrait(_selectedtitle, DateTime.now().toString(), _selectedQuantity,
-            _selectedCategory),
-      );
+      final url = Uri.https('first-project-8a707-default-rtdb.firebaseio.com',
+          'Shopping-List.json');
+      http
+          .post(
+        url,
+        headers: {'content-type': 'application/json'},
+        body: json.encode(
+          {
+            'name': _selectedtitle,
+            'Quantity': _selectedQuantity,
+            'Category ': _selectedCategory.title
+          },
+        ),
+      )
+          .then((onValue) {
+        print(onValue.body);
+        print(onValue.statusCode);
+      });
+      Navigator.of(context).pop();
+
+      // Navigator.of(context).pop(
+      //   ListTrait(_selectedtitle, DateTime.now().toString(), _selectedQuantity,
+      //       _selectedCategory),
+      // );
     }
   }
 
