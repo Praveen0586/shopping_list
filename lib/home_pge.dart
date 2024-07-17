@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shopping_list/model/groceries_category.dart';
 import 'package:shopping_list/new_item.dart';
@@ -22,12 +24,36 @@ class _HomePageState extends State<HomePage> {
     _getfromFirebase();
   }
 
+  List<ListTrait> cloudDatas = [];
   void _getfromFirebase() async {
-    final url = Uri.https('first-project-8a707-default-rtdb.firebaseio.com',
-        'Shopping-List.json');
-    http.get(url).then((response) {
-      print(response);
+    final url = Uri.https(
+        'first-project-8a707-default-rtdb.firebaseio.com', 'test.json');
+    final response = await http.get(url);
+
+    final Map<String, dynamic> listdatas = json.decode(response.body);
+    for (var item in listdatas.entries) {
+      print(item.value['Category']);
+      final category = catstest.entries
+          .firstWhere(
+              (catItem) => catItem.value.title == item.value['Category'])
+          .value;
+
+      print(item.value['name']);
+
+      cloudDatas.add(ListTrait(
+          item.value['name'], item.key, item.value['Quantity'], category));
+    }
+
+    setState(() {
+      newgrocerylist = cloudDatas;
     });
+  }
+
+  void _addsomeitem() async {
+    final newItem = await Navigator.of(context)
+        .push<ListTrait>(MaterialPageRoute(builder: (ctx) => const Newitem()));
+
+    _getfromFirebase();
   }
 
   @override
@@ -84,12 +110,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            final newItem = await Navigator.of(context).push<ListTrait>(
-                MaterialPageRoute(builder: (ctx) => const Newitem()));
-
-            _getfromFirebase();
-          },
+          onPressed: _addsomeitem,
           elevation: 50,
           child: Icon(
             Icons.add_circle_outline_sharp,

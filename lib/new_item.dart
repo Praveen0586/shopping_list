@@ -24,8 +24,8 @@ class _NewitemState extends State<Newitem> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text('Grocery Updated',
               style: Theme.of(context).textTheme.bodyLarge!)));
-      final url = Uri.https('first-project-8a707-default-rtdb.firebaseio.com',
-          'Shopping-List.json');
+      final url = Uri.https(
+          'first-project-8a707-default-rtdb.firebaseio.com', 'test.json');
       http.post(
         url,
         headers: {'content-type': 'application/json'},
@@ -33,7 +33,7 @@ class _NewitemState extends State<Newitem> {
           {
             'name': _selectedtitle,
             'Quantity': _selectedQuantity,
-            'Category ': _selectedCategory.title
+            'Category': _selectedCategory.title
           },
         ),
       );
