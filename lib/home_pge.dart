@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_list/model/groceries_category.dart';
 import 'package:shopping_list/new_item.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,6 +16,20 @@ void _removegrocery(ListTrait item) {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    _getfromFirebase();
+  }
+
+  void _getfromFirebase() async {
+    final url = Uri.https('first-project-8a707-default-rtdb.firebaseio.com',
+        'Shopping-List.json');
+    http.get(url).then((response) {
+      print(response);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget content = ListView.builder(
@@ -66,18 +81,14 @@ class _HomePageState extends State<HomePage> {
         ),
       );
     }
+
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
             final newItem = await Navigator.of(context).push<ListTrait>(
                 MaterialPageRoute(builder: (ctx) => const Newitem()));
 
-            if (newItem == null) {
-              return;
-            }
-            setState(() {
-              newgrocerylist.add(newItem);
-            });
+            _getfromFirebase();
           },
           elevation: 50,
           child: Icon(

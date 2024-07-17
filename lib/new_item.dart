@@ -26,8 +26,7 @@ class _NewitemState extends State<Newitem> {
               style: Theme.of(context).textTheme.bodyLarge!)));
       final url = Uri.https('first-project-8a707-default-rtdb.firebaseio.com',
           'Shopping-List.json');
-      http
-          .post(
+      http.post(
         url,
         headers: {'content-type': 'application/json'},
         body: json.encode(
@@ -37,11 +36,8 @@ class _NewitemState extends State<Newitem> {
             'Category ': _selectedCategory.title
           },
         ),
-      )
-          .then((onValue) {
-        print(onValue.body);
-        print(onValue.statusCode);
-      });
+      );
+
       Navigator.of(context).pop();
 
       // Navigator.of(context).pop(
