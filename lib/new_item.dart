@@ -18,7 +18,7 @@ class _NewitemState extends State<Newitem> {
   var _selectedQuantity = 1;
   final _formkey = GlobalKey<FormState>();
 
-  void _save() {
+  void _save() async {
     if (_formkey.currentState!.validate()) {
       _formkey.currentState!.save();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -26,22 +26,29 @@ class _NewitemState extends State<Newitem> {
               style: Theme.of(context).textTheme.bodyLarge!)));
       final url = Uri.https(
           'first-project-8a707-default-rtdb.firebaseio.com', 'test.json');
-      http.post(
+      final response = await http.post(
         url,
         headers: {'content-type': 'application/json'},
         body: json.encode(
           {
             'name': _selectedtitle,
             'Quantity': _selectedQuantity,
-            'Category': _selectedCategory.title
+            'Category': _selectedCategory
           },
         ),
       );
+      final Map<String, dynamic> resdata = json.decode(response.body);
 
-      Navigator.of(context).pop();
+      if (!context.mounted) {
+        return;
+      }
+      Navigator.of(context).pop(ListTrait(_selectedtitle, resdata['name'],
+          _selectedQuantity, _selectedCategory));
+
+
 
       // Navigator.of(context).pop(
-      //   ListTrait(_selectedtitle, DateTime.now().toString(), _selectedQuantity,
+      //   ListTrait(_selectedtitle, 'bb' , _selectedQuantity,
       //       _selectedCategory),
       // );
     }

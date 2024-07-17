@@ -53,7 +53,8 @@ class _HomePageState extends State<HomePage> {
     final newItem = await Navigator.of(context)
         .push<ListTrait>(MaterialPageRoute(builder: (ctx) => const Newitem()));
 
-    _getfromFirebase();
+    // _getfromFirebase();
+    newgrocerylist.add(newItem!);
   }
 
   @override
