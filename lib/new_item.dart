@@ -13,12 +13,14 @@ class _NewitemState extends State<Newitem> {
   var _selectedtitle = '';
   var _selectedCategory = catstest[Categories.diary]!;
   var _selectedQuantity = 1;
-  var _formkey = GlobalKey<FormState>();
+  final _formkey = GlobalKey<FormState>();
 
   void _save() {
     if (_formkey.currentState!.validate()) {
       _formkey.currentState!.save();
-
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Grocery Updated',
+              style: Theme.of(context).textTheme.bodyLarge!)));
       Navigator.of(context).pop(
         ListTrait(_selectedtitle, DateTime.now().toString(), _selectedQuantity,
             _selectedCategory),

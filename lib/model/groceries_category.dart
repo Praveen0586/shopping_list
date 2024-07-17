@@ -96,11 +96,7 @@ class ListTrait {
   final Category category;
 }
 
-List<ListTrait> newgrocerylist = [
-  ListTrait('Milk', 'c1', 5, catstest[Categories.backing]!),
-  ListTrait('Something', 'c2', 6, catstest[Categories.sices]!),
-  ListTrait('jk', DateTime.now().toString(), 5, catstest[Categories.meat]!)
-];
+List<ListTrait> newgrocerylist = [];
 
 var groceryList = [
   ListTrait('Milk', 'c1', 5, catstest[Categories.backing]!),
