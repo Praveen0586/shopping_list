@@ -18,9 +18,11 @@ class _NewitemState extends State<Newitem> {
   void _save() {
     if (_formkey.currentState!.validate()) {
       _formkey.currentState!.save();
-      print(_selectedCategory);
-      print(_selectedtitle);
-      print(_selectedQuantity);
+
+      Navigator.of(context).pop(
+        ListTrait(_selectedtitle, DateTime.now().toString(), _selectedQuantity,
+            _selectedCategory),
+      );
     }
   }
 
@@ -83,7 +85,7 @@ class _NewitemState extends State<Newitem> {
                               quantity.isEmpty ||
                               double.tryParse(quantity) == null ||
                               double.tryParse(quantity)! <= 0) {
-                            return ' At least the value must be 1 ';
+                            return ' The entered value must be an Integer ';
                           }
                           return null;
                         }),

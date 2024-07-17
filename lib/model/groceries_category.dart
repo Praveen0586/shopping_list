@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_list/datas/categories.dart';
+import 'package:line_icons/line_icons.dart';
 
 enum Categories {
   fruits,
@@ -24,7 +25,7 @@ const catstest = {
   Categories.vegitables: Category('Vegitables', Icons.view_agenda_outlined),
   Categories.meat: Category('Meat', Icons.food_bank_outlined),
   Categories.sauces: Category('Sauces', Icons.water_drop_outlined),
-  Categories.toileries: Category('Toileries', Icons.circle_outlined),
+  Categories.toileries: Category('Toileries', Icons.bathtub_outlined),
   Categories.snacks: Category('Snacks', Icons.screen_search_desktop_outlined),
   Categories.households: Category('House Holds', Icons.house_outlined)
 };
@@ -37,7 +38,7 @@ const icondata = {
   Categories.vegitables: Icons.view_agenda_outlined,
   Categories.meat: Icons.food_bank_outlined,
   Categories.households: Icons.house_outlined,
-  Categories.toileries: Icons.circle_outlined,
+  Categories.toileries: LineIcons.bath,
   Categories.snacks: Icons.screen_search_desktop_outlined,
   Categories.sauces: Icons.battery_std_outlined,
   Categories.fruits: Icons.shopping_basket_outlined
@@ -92,58 +93,22 @@ class ListTrait {
   final String title;
   final String id;
   final int quantity;
-  final Categories category;
+  final Category category;
 }
 
-const groceryList = [
-  ListTrait('Milk', 'c1', 5, Categories.backing),
-  ListTrait('Something', 'c2', 6, Categories.breads),
-  ListTrait('Newthing', 'c3', 6, Categories.sices),
-  ListTrait('Backing', 'c1', 5, Categories.backing),
-  ListTrait('Diary', 'c2', 5, Categories.diary),
-  ListTrait('Fruits', 'c3', 5, Categories.fruits),
-  ListTrait('Backing', 'c1', 7, Categories.backing),
-  ListTrait('Households', 'c2', 8, Categories.households),
-  ListTrait('Meat', 'c3', 6, Categories.meat),
-  ListTrait('Milk', 'c1', 4, Categories.backing),
-  ListTrait('Sauce', 'c2', 9, Categories.sauces),
-  ListTrait('Sices', 'c3', 3, Categories.sices),
-  ListTrait('Backing', 'c1', 5, Categories.backing),
-  ListTrait('Snacks', 'c2', 8, Categories.snacks),
-  ListTrait('Sices', 'c3', 9, Categories.sices),
-  ListTrait('Backing', 'c1', 4, Categories.backing),
-  ListTrait('Snacks', 'c2', 6, Categories.snacks),
-  ListTrait('Toilering', 'c3', 1, Categories.toileries),
-  ListTrait('Backing', 'c1', 2, Categories.backing),
-  ListTrait('Vegitables', 'c2', 3, Categories.vegitables),
-  ListTrait('Sauces', 'c3', 4, Categories.sauces),
-  ListTrait('Milk', 'c1', 5, Categories.backing),
-  ListTrait('Something', 'c2', 6, Categories.breads),
-  ListTrait('Newthing', 'c3', 7, Categories.sices),
-  ListTrait('Backing', 'c1', 8, Categories.backing),
-  ListTrait('Milk', 'c1', 5, Categories.backing),
-  ListTrait('Something', 'c2', 6, Categories.breads),
-  ListTrait('Newthing', 'c3', 6, Categories.sices),
-  ListTrait('Backing', 'c1', 5, Categories.backing),
-  ListTrait('Diary', 'c2', 5, Categories.diary),
-  ListTrait('Fruits', 'c3', 5, Categories.fruits),
-  ListTrait('Backing', 'c1', 7, Categories.backing),
-  ListTrait('Households', 'c2', 8, Categories.households),
-  ListTrait('Meat', 'c3', 6, Categories.meat),
-  ListTrait('Milk', 'c1', 4, Categories.backing),
-  ListTrait('Sauce', 'c2', 9, Categories.sauces),
-  ListTrait('Sices', 'c3', 3, Categories.sices),
-  ListTrait('Backing', 'c1', 5, Categories.backing),
-  ListTrait('Snacks', 'c2', 8, Categories.snacks),
-  ListTrait('Sices', 'c3', 9, Categories.sices),
-  ListTrait('Backing', 'c1', 4, Categories.backing),
-  ListTrait('Snacks', 'c2', 6, Categories.snacks),
-  ListTrait('Toilering', 'c3', 1, Categories.toileries),
-  ListTrait('Backing', 'c1', 2, Categories.backing),
-  ListTrait('Vegitables', 'c2', 3, Categories.vegitables),
-  ListTrait('Sauces', 'c3', 4, Categories.sauces),
-  ListTrait('Milk', 'c1', 5, Categories.backing),
-  ListTrait('Something', 'c2', 6, Categories.breads),
-  ListTrait('Newthing', 'c3', 7, Categories.sices),
-  ListTrait('Backing', 'c1', 8, Categories.backing),
+List<ListTrait> newgrocerylist = [
+  ListTrait('Milk', 'c1', 5, catstest[Categories.backing]!),
+  ListTrait('Something', 'c2', 6, catstest[Categories.sices]!),
+  ListTrait('jk', DateTime.now().toString(), 5, catstest[Categories.meat]!)
+];
+
+var groceryList = [
+  ListTrait('Milk', 'c1', 5, catstest[Categories.backing]!),
+  ListTrait(
+    'Something',
+    'c2',
+    6,
+    catstest[Categories.fruits]!,
+  ),
+  ListTrait('jk', DateTime.now().toString(), 5, catstest[Categories.meat]!)
 ];
