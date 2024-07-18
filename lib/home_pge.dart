@@ -18,6 +18,7 @@ void _removegrocery(ListTrait item) {
 }
 
 class _HomePageState extends State<HomePage> {
+  String? error;
   var isLoading = true;
   @override
   void initState() {
@@ -27,8 +28,16 @@ class _HomePageState extends State<HomePage> {
 
   void _cloudrecive() async {
     final url = Uri.https(
-        'first-project-8a707-default-rtdb.firebaseio.com', 'testing-3.json');
+        'first-project-8a707-default-rtdb.firebaseio.com', 'testing-4.json');
     final listdata = await http.get(url);
+
+    if (listdata.statusCode >= 400) {
+      setState(() {
+        error = 'Oopsie! Couldn\'t get the data, try again later';
+      });
+    }
+    //  print(listdata.statusCode);
+
     final Map<String, dynamic> cloud = json.decode(listdata.body);
     List<ListTrait> _cloudbackups = [];
     for (var datas in cloud.entries) {
@@ -111,6 +120,11 @@ class _HomePageState extends State<HomePage> {
     if (isLoading) {
       content = const Center(
         child: CircularProgressIndicator(),
+      );
+    }
+    if (error != null) {
+      content = Center(
+        child: Text(error!),
       );
     }
     return Scaffold(

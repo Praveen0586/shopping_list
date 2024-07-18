@@ -29,8 +29,8 @@ class _NewitemState extends State<Newitem> {
             content: Text('Grocery Updated',
                 style: Theme.of(context).textTheme.bodyLarge!)));
 
-        final url = Uri.https('first-project-8a707-default-rtdb.firebaseio.com',
-            'testing-3.json');
+        final url = Uri.https(
+        'first-project-8a707-default-rtdb.firebaseio.com', 'testing-4.json');
         final respose = await http.post(url,
             headers: {'content-type': 'application/json'},
             body: json.encode({
@@ -39,7 +39,7 @@ class _NewitemState extends State<Newitem> {
               'category': _selectedCategory.title
             }));
 
-        print(respose.statusCode);
+      
         if (!context.mounted) {
           return;
         }
