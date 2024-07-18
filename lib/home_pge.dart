@@ -41,6 +41,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       newgrocerylist = _cloudbackups;
     });
+    
   }
 
   @override
