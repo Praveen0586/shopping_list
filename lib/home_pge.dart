@@ -18,6 +18,7 @@ void _removegrocery(ListTrait item) {
 }
 
 class _HomePageState extends State<HomePage> {
+  var isLoading = true;
   @override
   void initState() {
     super.initState();
@@ -40,8 +41,8 @@ class _HomePageState extends State<HomePage> {
 
     setState(() {
       newgrocerylist = _cloudbackups;
+      isLoading = false;
     });
-    
   }
 
   @override
@@ -107,7 +108,11 @@ class _HomePageState extends State<HomePage> {
         ),
       );
     }
-
+    if (isLoading) {
+      content = const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: _addsomeitem,

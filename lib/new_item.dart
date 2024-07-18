@@ -13,6 +13,7 @@ class Newitem extends StatefulWidget {
 }
 
 class _NewitemState extends State<Newitem> {
+  var isSending = false;
   var _selectedtitle = '';
   var _selectedCategory = catstest[Categories.diary]!;
   var _selectedQuantity = 1;
@@ -23,7 +24,7 @@ class _NewitemState extends State<Newitem> {
     void _save() async {
       if (_formkey.currentState!.validate()) {
         _formkey.currentState!.save();
-
+        isSending = true;
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text('Grocery Updated',
                 style: Theme.of(context).textTheme.bodyLarge!)));
@@ -42,7 +43,7 @@ class _NewitemState extends State<Newitem> {
         if (!context.mounted) {
           return;
         }
-     
+
         final Map<String, dynamic> fromResponse = json.decode(respose.body);
         Navigator.of(context).pop(ListTrait(_selectedtitle,
             fromResponse['name'], _selectedQuantity, _selectedCategory));
@@ -179,9 +180,11 @@ class _NewitemState extends State<Newitem> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton.icon(
-                      onPressed: () {
-                        _formkey.currentState!.reset();
-                      },
+                      onPressed: isSending
+                          ? null
+                          : () {
+                              _formkey.currentState!.reset();
+                            },
                       icon: const Icon(Icons.chevron_left_outlined),
                       label: Text(
                         'Reset',
@@ -192,7 +195,13 @@ class _NewitemState extends State<Newitem> {
                         backgroundColor: WidgetStatePropertyAll(
                             Theme.of(context).colorScheme.onSecondary)),
                     onPressed: _save,
-                    label: const Text('Add'),
+                    label: isSending
+                        ? const SizedBox(
+                            height: 18,
+                            width: 18,
+                            child: CircularProgressIndicator(),
+                          )
+                        : const Text('Add'),
                     icon: const Icon(
                       Icons.done_all_outlined,
                       size: 12,
