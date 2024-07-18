@@ -24,35 +24,42 @@ class _HomePageState extends State<HomePage> {
   void _cloudrecive() async {
     final url = Uri.https(
         'first-project-8a707-default-rtdb.firebaseio.com', 'testing-4.json');
-    final listdata = await http.get(url);
+    try {
+      final listdata = await http.get(url);
 
-    if (listdata.statusCode >= 400) {
-      setState(() {
-        error = 'Oopsie! Couldn\'t get the data, try again later';
-      });
-    }
-    //  print(listdata.statusCode);
+      if (listdata.statusCode >= 400) {
+        setState(() {
+          error = 'Oopsie! Couldn\'t get the data, try again later';
+        });
+      }
+      //  print(listdata.statusCode);
 
-    if (listdata.body == 'null') {
+      if (listdata.body == 'null') {
+        setState(() {
+          isLoading = false;
+        });
+        return;
+      }
+      final Map<String, dynamic> cloud = json.decode(listdata.body);
+      List<ListTrait> _cloudbackups = [];
+      for (var datas in cloud.entries) {
+        final findCategory = catstest.entries
+            .firstWhere(
+                (findit) => datas.value['category'] == findit.value.title)
+            .value;
+        _cloudbackups.add(ListTrait(datas.value['name'], datas.key,
+            datas.value['quantity'], findCategory));
+      }
+
       setState(() {
+        newgrocerylist = _cloudbackups;
         isLoading = false;
       });
-      return;
+    } catch (err) {
+      setState(() {
+        error = 'Something went Wrong, Please try agin later ';
+      });
     }
-    final Map<String, dynamic> cloud = json.decode(listdata.body);
-    List<ListTrait> _cloudbackups = [];
-    for (var datas in cloud.entries) {
-      final findCategory = catstest.entries
-          .firstWhere((findit) => datas.value['category'] == findit.value.title)
-          .value;
-      _cloudbackups.add(ListTrait(datas.value['name'], datas.key,
-          datas.value['quantity'], findCategory));
-    }
-
-    setState(() {
-      newgrocerylist = _cloudbackups;
-      isLoading = false;
-    });
   }
 
   // adding a new fuction to remove the grocery data
