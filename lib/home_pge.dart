@@ -33,6 +33,12 @@ class _HomePageState extends State<HomePage> {
     }
     //  print(listdata.statusCode);
 
+    if (listdata.body == 'null') {
+      setState(() {
+        isLoading = false;
+      });
+      return;
+    }
     final Map<String, dynamic> cloud = json.decode(listdata.body);
     List<ListTrait> _cloudbackups = [];
     for (var datas in cloud.entries) {
@@ -51,17 +57,18 @@ class _HomePageState extends State<HomePage> {
 
   // adding a new fuction to remove the grocery data
   void _removegrocery(ListTrait item) async {
-     final index = newgrocerylist.indexOf(item);
+    final index = newgrocerylist.indexOf(item);
     setState(() {
       newgrocerylist.remove(item);
     });
-   
-    final url = Uri.https('first-project-8a707-default-rtdb.firebaseio.com', 'testing-4/${item.id}.json');
+
+    final url = Uri.https('first-project-8a707-default-rtdb.firebaseio.com',
+        'testing-4/${item.id}.json');
     final res = await http.delete(url);
 
     if (res.statusCode >= 400) {
       setState(() {
-        newgrocerylist.insert(index,item);
+        newgrocerylist.insert(index, item);
       });
     }
   }
