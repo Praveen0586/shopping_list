@@ -19,46 +19,50 @@ void _removegrocery(ListTrait item) {
 
 class _HomePageState extends State<HomePage> {
   @override
-  void initState() {
-    super.initState();
-    _getfromFirebase();
-  }
+  // void initState() {
+  //   super.initState();
+  //  // _getfromFirebase();
+  // }
 
-  List<ListTrait> cloudDatas = [];
-  void _getfromFirebase() async {
-    final url = Uri.https(
-        'first-project-8a707-default-rtdb.firebaseio.com', 'test.json');
-    final response = await http.get(url);
+  // List<ListTrait> cloudDatas = [];
+  // void _getfromFirebase() async {
+  //   final url = Uri.https(
+  //       'first-project-8a707-default-rtdb.firebaseio.com', 'test.json');
+  //   final response = await http.get(url);
 
-    final Map<String, dynamic> listdatas = json.decode(response.body);
-    for (var item in listdatas.entries) {
-      print(item.value['Category']);
-      final category = catstest.entries
-          .firstWhere(
-              (catItem) => catItem.value.title == item.value['Category'])
-          .value;
+  //   final Map<String, dynamic> listdatas = json.decode(response.body);
+  //   for (var item in listdatas.entries) {
+  //     print(item.value['Category']);
+  //     final category = catstest.entries
+  //         .firstWhere(
+  //             (catItem) => catItem.value.title == item.value['Category'])
+  //         .value;
 
-      print(item.value['name']);
+  //     print(item.value['name']);
 
-      cloudDatas.add(ListTrait(
-          item.value['name'], item.key, item.value['Quantity'], category));
-    }
+  //     cloudDatas.add(ListTrait(
+  //         item.value['name'], item.key, item.value['Quantity'], category));
+  //   }
 
-    setState(() {
-      newgrocerylist = cloudDatas;
-    });
-  }
-
-  void _addsomeitem() async {
-    final newItem = await Navigator.of(context)
-        .push<ListTrait>(MaterialPageRoute(builder: (ctx) => const Newitem()));
-
-    // _getfromFirebase();
-    newgrocerylist.add(newItem!);
-  }
+  //   setState(() {
+  //     newgrocerylist = cloudDatas;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
+    void _addsomeitem() async {
+      final newItem = await Navigator.of(context).push<ListTrait>(
+          MaterialPageRoute(builder: (ctx) => const Newitem()));
+
+      // _getfromFirebase();
+      setState(() {
+        newgrocerylist.add(newItem!);
+      });
+
+      print(newgrocerylist);
+    }
+
     Widget content = ListView.builder(
       itemCount: newgrocerylist.length,
       itemBuilder: (context, index) => Dismissible(

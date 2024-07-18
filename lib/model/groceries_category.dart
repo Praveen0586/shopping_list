@@ -96,7 +96,15 @@ class ListTrait {
   final Category category;
 }
 
-List<ListTrait> newgrocerylist = [];
+List<ListTrait> newgrocerylist = [
+  ListTrait('Milk', 'c1', 5, catstest[Categories.backing]!),
+  ListTrait(
+    'Something',
+    'c2',
+    6,
+    catstest[Categories.fruits]!,
+  ),
+];
 
 var groceryList = [
   ListTrait('Milk', 'c1', 5, catstest[Categories.backing]!),
