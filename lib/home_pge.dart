@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
 
   void _cloudrecive() async {
     final url = Uri.https(
-        'first-project-8a707-default-rtdb.firebaseio.com', 'testing-2.json');
+        'first-project-8a707-default-rtdb.firebaseio.com', 'testing-3.json');
     final listdata = await http.get(url);
     final Map<String, dynamic> cloud = json.decode(listdata.body);
     List<ListTrait> _cloudbackups = [];
@@ -49,12 +49,7 @@ class _HomePageState extends State<HomePage> {
       final newItem = await Navigator.of(context).push<ListTrait>(
           MaterialPageRoute(builder: (ctx) => const Newitem()));
 
-      // setState(() {
-      //   newgrocerylist.add(newItem!);
-      // });
       _cloudrecive();
-
-      // print(newgrocerylist);
     }
 
     Widget content = ListView.builder(

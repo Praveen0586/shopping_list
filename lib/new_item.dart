@@ -27,11 +27,9 @@ class _NewitemState extends State<Newitem> {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text('Grocery Updated',
                 style: Theme.of(context).textTheme.bodyLarge!)));
-
-        // Navigator.of(context).pop(ListTrait(_selectedtitle,
-        //     DateTime.now().toString(), _selectedQuantity, _selectedCategory));
+                
         final url = Uri.https('first-project-8a707-default-rtdb.firebaseio.com',
-            'testing-2.json');
+            'testing-3.json');
         final respose = await http.post(url,
             headers: {'content-type': 'application/json'},
             body: json.encode({
@@ -39,9 +37,6 @@ class _NewitemState extends State<Newitem> {
               'quantity': _selectedQuantity,
               'category': _selectedCategory.title
             }));
-        //     .then(( response) {
-        //   print(response.body);
-        // });
 
         print(respose.statusCode);
         if (!context.mounted) {
@@ -49,10 +44,7 @@ class _NewitemState extends State<Newitem> {
         }
 
         Navigator.of(context).pop();
-        // Navigator.of(context).pop(
-        //   ListTrait(_selectedtitle, 'bb' , _selectedQuantity,
-        //       _selectedCategory),
-        // );
+   
       }
     }
 
