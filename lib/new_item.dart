@@ -28,7 +28,19 @@ class _NewitemState extends State<Newitem> {
 
       Navigator.of(context).pop(ListTrait(_selectedtitle,
           DateTime.now().toString(), _selectedQuantity, _selectedCategory));
-
+      final url = Uri.https(
+          'first-project-8a707-default-rtdb.firebaseio.com', 'testing-2.json');
+      http
+          .post(url,
+              headers: {'content-type': 'application/json'},
+              body: json.encode({
+                'name': _selectedtitle,
+                'quantity': _selectedQuantity,
+                'category': _selectedCategory.title
+              }))
+          .then((response) {
+        print(response.body);
+      });
       // Navigator.of(context).pop(
       //   ListTrait(_selectedtitle, 'bb' , _selectedQuantity,
       //       _selectedCategory),
