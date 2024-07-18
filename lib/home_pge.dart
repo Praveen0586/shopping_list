@@ -19,7 +19,29 @@ void _removegrocery(ListTrait item) {
 
 class _HomePageState extends State<HomePage> {
   @override
- 
+  void initState() {
+    super.initState();
+    _cloudrecive();
+  }
+
+  void _cloudrecive() async {
+    final url = Uri.https(
+        'first-project-8a707-default-rtdb.firebaseio.com', 'testing-2.json');
+    final listdata = await http.get(url);
+    final Map<String, dynamic> cloud = json.decode(listdata.body);
+    List<ListTrait> _cloudbackups = [];
+    for (var datas in cloud.entries) {
+      final findCategory = catstest.entries
+          .firstWhere((findit) => datas.value['category'] == findit.value.title)
+          .value;
+      _cloudbackups.add(ListTrait(datas.value['name'], datas.key,
+          datas.value['quantity'], findCategory));
+    }
+
+    setState(() {
+      newgrocerylist = _cloudbackups;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +49,12 @@ class _HomePageState extends State<HomePage> {
       final newItem = await Navigator.of(context).push<ListTrait>(
           MaterialPageRoute(builder: (ctx) => const Newitem()));
 
-      // _getfromFirebase();
-      setState(() {
-        newgrocerylist.add(newItem!);
-      });
+      // setState(() {
+      //   newgrocerylist.add(newItem!);
+      // });
+      _cloudrecive();
 
-      print(newgrocerylist);
+      // print(newgrocerylist);
     }
 
     Widget content = ListView.builder(
