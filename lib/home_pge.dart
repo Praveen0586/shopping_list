@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
 
   void _cloudrecive() async {
     final url = Uri.https(
-        'first-project-8a707-default-rtdb.firebaseio.com', 'testing-4.json');
+        'first-project-8a707-default-rtdb.firebaseio.com', 'bs.json');
     try {
       final listdata = await http.get(url);
 
@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
     });
 
     final url = Uri.https('first-project-8a707-default-rtdb.firebaseio.com',
-        'testing-4/${item.id}.json');
+        'bs/${item.id}.json');
     final res = await http.delete(url);
 
     if (res.statusCode >= 400) {

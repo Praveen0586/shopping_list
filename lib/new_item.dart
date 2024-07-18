@@ -30,7 +30,7 @@ class _NewitemState extends State<Newitem> {
                 style: Theme.of(context).textTheme.bodyLarge!)));
 
         final url = Uri.https(
-        'first-project-8a707-default-rtdb.firebaseio.com', 'testing-4.json');
+        'first-project-8a707-default-rtdb.firebaseio.com', 'bs.json');
         final respose = await http.post(url,
             headers: {'content-type': 'application/json'},
             body: json.encode({
