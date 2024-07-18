@@ -19,35 +19,7 @@ void _removegrocery(ListTrait item) {
 
 class _HomePageState extends State<HomePage> {
   @override
-  // void initState() {
-  //   super.initState();
-  //  // _getfromFirebase();
-  // }
-
-  // List<ListTrait> cloudDatas = [];
-  // void _getfromFirebase() async {
-  //   final url = Uri.https(
-  //       'first-project-8a707-default-rtdb.firebaseio.com', 'test.json');
-  //   final response = await http.get(url);
-
-  //   final Map<String, dynamic> listdatas = json.decode(response.body);
-  //   for (var item in listdatas.entries) {
-  //     print(item.value['Category']);
-  //     final category = catstest.entries
-  //         .firstWhere(
-  //             (catItem) => catItem.value.title == item.value['Category'])
-  //         .value;
-
-  //     print(item.value['name']);
-
-  //     cloudDatas.add(ListTrait(
-  //         item.value['name'], item.key, item.value['Quantity'], category));
-  //   }
-
-  //   setState(() {
-  //     newgrocerylist = cloudDatas;
-  //   });
-  // }
+ 
 
   @override
   Widget build(BuildContext context) {
