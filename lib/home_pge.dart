@@ -48,8 +48,13 @@ class _HomePageState extends State<HomePage> {
     void _addsomeitem() async {
       final newItem = await Navigator.of(context).push<ListTrait>(
           MaterialPageRoute(builder: (ctx) => const Newitem()));
-
-      _cloudrecive();
+      if (newItem == null) {
+        return;
+      }
+      // _cloudrecive();
+      setState(() {
+        newgrocerylist.add(newItem);
+      });
     }
 
     Widget content = ListView.builder(

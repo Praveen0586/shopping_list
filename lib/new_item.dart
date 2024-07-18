@@ -27,7 +27,7 @@ class _NewitemState extends State<Newitem> {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text('Grocery Updated',
                 style: Theme.of(context).textTheme.bodyLarge!)));
-                
+
         final url = Uri.https('first-project-8a707-default-rtdb.firebaseio.com',
             'testing-3.json');
         final respose = await http.post(url,
@@ -42,9 +42,10 @@ class _NewitemState extends State<Newitem> {
         if (!context.mounted) {
           return;
         }
-
-        Navigator.of(context).pop();
-   
+     
+        final Map<String, dynamic> fromResponse = json.decode(respose.body);
+        Navigator.of(context).pop(ListTrait(_selectedtitle,
+            fromResponse['name'], _selectedQuantity, _selectedCategory));
       }
     }
 
