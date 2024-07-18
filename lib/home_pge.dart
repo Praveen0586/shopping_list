@@ -12,11 +12,6 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-// adding a new fuction to remove the grocery data
-void _removegrocery(ListTrait item) {
-  newgrocerylist.remove(item);
-}
-
 class _HomePageState extends State<HomePage> {
   String? error;
   var isLoading = true;
@@ -52,6 +47,23 @@ class _HomePageState extends State<HomePage> {
       newgrocerylist = _cloudbackups;
       isLoading = false;
     });
+  }
+
+  // adding a new fuction to remove the grocery data
+  void _removegrocery(ListTrait item) async {
+     final index = newgrocerylist.indexOf(item);
+    setState(() {
+      newgrocerylist.remove(item);
+    });
+   
+    final url = Uri.https('first-project-8a707-default-rtdb.firebaseio.com', 'testing-4/${item.id}.json');
+    final res = await http.delete(url);
+
+    if (res.statusCode >= 400) {
+      setState(() {
+        newgrocerylist.insert(index,item);
+      });
+    }
   }
 
   @override
@@ -127,6 +139,7 @@ class _HomePageState extends State<HomePage> {
         child: Text(error!),
       );
     }
+
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: _addsomeitem,
